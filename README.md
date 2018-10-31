@@ -1,5 +1,5 @@
 
-#Search Bar
+# Search Bar
 An interactive search bar, which returns search result based on data previously feed. The main purpose of this app is to serve a taste like google or youtube search bar.
 
 ## Available Scripts
