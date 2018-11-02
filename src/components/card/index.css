@@ -1,0 +1,73 @@
+.card{
+  border-bottom: 0.1px solid #F2F3F4;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.card:hover {
+  background-color: #FFFDDC;
+}
+
+.card .id, .card .name, .card .items, .card .address, .card .pincode{
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background: transparent;
+}
+
+.card .id{
+  font-weight: 600;
+  font-size: 16px;
+  padding-bottom: 1px;
+}
+
+.card .name {
+  padding-bottom: 1px;
+}
+
+.card .address {
+  padding-bottom: 1px;
+}
+
+.card .pincode {
+  padding-top: 1px;
+}
+
+.item-found{
+  font-weight: 400;
+  font-size: 12px;
+}
+.dot{
+  margin-top: -3px;
+  padding-right: 5px;
+}
+
+.dot::before{
+  content: '\f111';
+  font-family: "Font Awesome 5 Free";
+  font-size: 6px;
+  font-weight: 600;
+  color: #4E8EEE;
+}
+.card .name{
+  padding-top: 2px;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400
+}
+
+.card .items{
+  display: flex;
+  flex-direction: row;
+  color: #555B61;
+  border-bottom: 0.1px solid #F2F3F4;
+  border-top: 0.1px solid #F2F3F4;
+}
+
+.highlight-text{
+  color: #4E8EEE;
+}
+/* .normal-text{
+
+} */

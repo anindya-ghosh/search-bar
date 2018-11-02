@@ -1,0 +1,17 @@
+.search-result{
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.search-result.no-data::before {
+  content: 'No User Found';
+  color: #696E75;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+}
+.search-result.search-result.no-data{
+  height: 150px !important;
+  text-align: center;
+  padding-top: 100px;
+}

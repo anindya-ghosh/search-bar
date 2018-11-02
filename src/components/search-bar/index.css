@@ -1,0 +1,42 @@
+.search-bar{
+  height: 55px;
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: white;
+  color: #B4B8BE;
+  border-bottom: 1px solid #F2F3F4;
+}
+
+.search-icon{
+  flex: 1;
+  text-align: center;
+  background-color: white;
+  padding: 15px;
+  padding-right: 0px;
+  padding-top: 17px;
+}
+
+.search-icon::before{
+  font-family: "Font Awesome 5 Free";
+  font-size: 20px;
+  font-weight: 600;
+  content: '\f002';
+}
+
+.search-text:placeholder-shown + .search-icon{
+  background-color: #F2F3F4;
+}
+.search-text:placeholder-shown{
+  color: #B4B8BE;
+  border: none;
+  background-color: #F2F3F4;
+}
+.search-text{
+  outline: none!important;
+  flex: 10;
+  border: none;
+  font-size: 20px;
+  padding: 0px;
+  background-color: white;
+  padding: 5px;
+}
