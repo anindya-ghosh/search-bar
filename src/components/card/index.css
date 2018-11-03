@@ -4,10 +4,12 @@
   padding-right: 25px;
   padding-top: 15px;
   padding-bottom: 15px;
+  cursor: pointer;
 }
 
-.card:hover {
+.card.hover {
   background-color: #FFFDDC;
+  outline: none;
 }
 
 .card .id, .card .name, .card .items, .card .address, .card .pincode{

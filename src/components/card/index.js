@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import './index.css';
 
 function RenderItems (props) {
-  // var result = false;
-  // for (let i = 0, len = props.items.length; i < len; i++) {
-  //   if (props.items[i].split(props.highlight).length > 1) {
-  //     result = true;
-  //     break;
-  //   }
-  // }
   if (props.found) {
     return <div className="items"><div className="dot"></div><div className="item-found">{`"${props.highlight}" found in items`}</div></div>
   }
@@ -32,9 +25,22 @@ function TextHighLighter (props) {
   return textElems;
 }
 class Card extends Component {
+  constructor (props) {
+    super(props);
+    this.card = React.createRef();
+    this.state = {hovered : false};
+    this.mouseOverHandler = this.mouseOverHandler.bind(this);
+  }
+  componentDidUpdate () {
+    this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
+  }
+  mouseOverHandler () {
+    this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
+    this.props.setCurrentHoveredCard(this.props.index);
+  }
   render () {
     return (
-      <div className="card">
+      <div className={`card`} ref = {this.card} onMouseOver = {this.mouseOverHandler}>
         <div className="id">
           <React.Fragment>
             <TextHighLighter text = {this.props.id} highlight = {this.props.highlight}/>

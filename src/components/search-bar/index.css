@@ -29,6 +29,7 @@
 .search-text:placeholder-shown{
   color: #B4B8BE;
   border: none;
+  padding: 0px!important;
   background-color: #F2F3F4;
 }
 .search-text{
@@ -37,6 +38,28 @@
   border: none;
   font-size: 20px;
   padding: 0px;
+  padding-right: 40px !important;
   background-color: white;
   padding: 5px;
+}
+
+.close::before{
+  content: '\f00d';
+  font-family: "Font Awesome 5 Free";
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.close {
+  display: block;
+  float: right;
+  position: absolute;
+  height: 21px;
+  width: 21px;
+  margin-top: 18px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.hide {
+  display: none !important;
 }

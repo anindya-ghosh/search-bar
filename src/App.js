@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './components/search-bar';
 import SearchResult from './components/search-result';
 import data from './ext-data/data';
-import './App.css';
+import './app.css';
 
 function search (key) {
   var result = [],
@@ -41,7 +41,7 @@ function search (key) {
   return result;
 }
 
-function throttle(fn, wait) {
+function fetchSearchKey(fn, wait) {
   var time = Date.now(),
     timeOutId;
   return function(e) {
@@ -62,21 +62,26 @@ class App extends Component {
       searchKey: '',
       searchResult: []
     };
-    this.setSearchKey = this.setSearchKey.bind(this);
-    this.throttle = throttle(this.getSearchKey.bind(this), 300);
+    this.notifyClear = this.notifyClear.bind(this);
+    this.setCurrentSearchKey = this.setCurrentSearchKey.bind(this);
+    this.fetchSearchKey = fetchSearchKey(this.setSearchKey.bind(this), 300);
   }
-  setSearchKey (e) {
-    this.currentKey = e ? e.target.value : '';
+  setCurrentSearchKey (key = '') {
+    this.currentKey = key;
   }
-  getSearchKey () {
+  setSearchKey () {
     this.setState({searchKey: this.currentKey});
+  }
+  notifyClear () {
+    this.setState({searchKey: ''});
   }
   render() {
     return (
       <div className="Search-App">
         <SearchBar 
-          throttle = { this.throttle }
-          setSearchKey = { this.setSearchKey }
+          fetchSearchKey = { this.fetchSearchKey }
+          setCurrentSearchKey = { this.setCurrentSearchKey }
+          notifyClear = { this.notifyClear }
         />
         <SearchResult
           searchKey = { this.state.searchKey }
