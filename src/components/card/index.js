@@ -33,10 +33,11 @@ class Card extends Component {
   }
   componentDidUpdate () {
     this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
+    this.props.hovered && (this.props.decideScrollPosition(this.card));
   }
   mouseOverHandler () {
     this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
-    this.props.setCurrentHoveredCard(this.props.index);
+    this.props.setMouseHoveredCard(this.props.index);
   }
   render () {
     return (
