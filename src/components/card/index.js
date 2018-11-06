@@ -33,7 +33,6 @@ class Card extends Component {
     super(props);
     this.card = React.createRef();
     this.state = {hovered : false};
-    this.mouseOverHandler = this.mouseOverHandler.bind(this);
   }
   /**
    * notifies parent component that the card is hovered or selected
@@ -47,39 +46,55 @@ class Card extends Component {
    * notifies parent component that the card is hovered by mouse pointer so that
    * when keyboard arrow key is pressed it knows where the pointer was previously
    */
-  mouseOverHandler () {
+  hoverHandler () {
     this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
     this.props.setMouseHoveredCard(this.props.index);
+  }
+  /**
+   * handles mouse over job
+   */
+  mouseOverHandler = () => {
+    this.hoverHandler();
+  }
+  /**
+   * handles mouse move job
+   */
+  mouseMoveHandler = () => {
+    this.props.unlockMouseListen();
+    this.hoverHandler();
   }
   /**
    * renderd Card component
    */
   render () {
     return (
-      <div className={`card`} ref = {this.card} onMouseOver = {this.mouseOverHandler}>
-        <div className="id">
-          <React.Fragment>
-            <TextHighLighter text = {this.props.id} highlight = {this.props.highlight}/>
-          </React.Fragment>
-        </div>
-        <div className="name">
-          <React.Fragment>
-              <TextHighLighter text = {this.props.name} highlight = {this.props.highlight}/>
+      <div className={`card`} 
+        ref = {this.card}
+        onMouseOver = {this.mouseOverHandler}
+        onMouseMove = {this.mouseMoveHandler}>
+          <div className="id">
+            <React.Fragment>
+              <TextHighLighter text = {this.props.id} highlight = {this.props.highlight}/>
             </React.Fragment>
-        </div>
-        <React.Fragment>
-          <RenderItems found = {!!this.props.items} highlight = {this.props.highlight}/>
-        </React.Fragment>
-        <div className="address">
+          </div>
+          <div className="name">
+            <React.Fragment>
+                <TextHighLighter text = {this.props.name} highlight = {this.props.highlight}/>
+              </React.Fragment>
+          </div>
           <React.Fragment>
-            <TextHighLighter text = {this.props.address} highlight = {this.props.highlight}/>
+            <RenderItems found = {!!this.props.items} highlight = {this.props.highlight}/>
           </React.Fragment>
-        </div>
-        <div className="pincode">
-          <React.Fragment>
-            <TextHighLighter text = {this.props.pincode} highlight = {this.props.highlight}/>
-          </React.Fragment>
-        </div>
+          <div className="address">
+            <React.Fragment>
+              <TextHighLighter text = {this.props.address} highlight = {this.props.highlight}/>
+            </React.Fragment>
+          </div>
+          <div className="pincode">
+            <React.Fragment>
+              <TextHighLighter text = {this.props.pincode} highlight = {this.props.highlight}/>
+            </React.Fragment>
+          </div>
       </div>
     );
   }

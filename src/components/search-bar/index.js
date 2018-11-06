@@ -9,8 +9,6 @@ class SearchBar extends Component {
     super(props);
     this.state = { hideButton: true };
     this.searchText = React.createRef();
-    this.onChangeHandler = this.onChangeHandler.bind(this);
-    this.onClickHandler = this.onClickHandler.bind(this);
   }
   /**
    * handles job on click on the cross button
@@ -18,7 +16,7 @@ class SearchBar extends Component {
    * - notifies parent to reset search key state
    * - resets value of the search bar
    */
-  onClickHandler () {
+  onClickHandler = () => {
     this.searchText.current.value = '';
     this.setState({hideButton: true});
     this.props.notifyClear();
@@ -30,7 +28,7 @@ class SearchBar extends Component {
    * - invokes parent's fetch API
    * @param {Event} e React event object
    */
-  onChangeHandler (e) {
+  onChangeHandler = (e) => {
     this.setState({hideButton: this.searchText.current.value === ''})
     this.props.setCurrentSearchKey(this.searchText.current.value);
     this.props.fetchSearchKey(e);

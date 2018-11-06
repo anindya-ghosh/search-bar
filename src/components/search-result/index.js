@@ -13,9 +13,6 @@ class Result extends Component {
     this.state = {keyState: 0};
     this._curHoverId = -1;
     this.resultSpace = React.createRef();
-    this._setMouseHoveredCard = this._setMouseHoveredCard.bind(this);
-    this._keyDownHandler = this._keyDownHandler.bind(this);
-    this._decideScrollPosition = this._decideScrollPosition.bind(this);
   }
   /**
    * handles scroll operation by keyboard arrow keys
@@ -23,22 +20,42 @@ class Result extends Component {
    * - sets current hovered card index depending on the which key is pressed
    * @param {Event} e React event object
    */
-  _keyDownHandler (e) {
+  _keyDownHandler = (e) => {
     if (e.keyCode === 38) { // up
+      this.lockMouseListen();
       this._curHoverId > 0 && (this._curHoverId--);
       this.setState({keyState: -1});
       e.preventDefault();
     }
     if (e.keyCode === 40) { // down
+      this.lockMouseListen();
       (this._curHoverId < this.props.searchResult.length - 1) && (this._curHoverId++);
       this.setState({keyState: 1});
     }
   }
   /**
+   * lock the mouse listner to avoid conflict on keyboard scrolling
+   */
+  lockMouseListen () {
+    this._lockM = true;
+  }
+  /**
+   * unlock the mouse listner to perform necessary job on mouse hover
+   */
+  unlockMouseListen = () => {
+    this._lockM = false;
+  }
+  /**
+   * check if mouse listener is locked or not
+   */
+  isLockMouseListen () {
+    return this._lockM;
+  }
+  /**
    * decides the current scroll offset
    * @param {Reference} cardRef ref of the currently hovered card
    */
-  _decideScrollPosition (cardRef) {
+  _decideScrollPosition = (cardRef) => {
     if (cardRef) {
       let hoveredCardBound = cardRef.current.getBoundingClientRect(),
         resultSpaceBound = this.resultSpace.current.getBoundingClientRect();
@@ -57,9 +74,11 @@ class Result extends Component {
    * also stores index of hovered card
    * @param {number} id index of hovered card
    */
-  _setMouseHoveredCard (id) {
-    this.setState({keyState: 0});
-    id !== undefined && (this._curHoverId = id);
+  _setMouseHoveredCard = (id) => {
+    if (!this.isLockMouseListen()) {
+      this.setState({keyState: 0});
+      id !== undefined && (this._curHoverId = id);
+    }
   }
   /**
    * resets hovered card index and keyState when search key is changed
@@ -102,6 +121,7 @@ class Result extends Component {
             highlight = {this.props.searchKey}
             hovered = {this._curHoverId === i}
             setMouseHoveredCard = {this._setMouseHoveredCard}
+            unlockMouseListen = {this.unlockMouseListen}
             decideScrollPosition = {this._decideScrollPosition}
           />)
         }

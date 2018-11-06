@@ -2,9 +2,18 @@
 # Search Bar
 An interactive search bar, which returns search result based on data previously feed. The main purpose of this app is to serve a taste like google or youtube search bar.
 
-## Available Scripts
 
-In the project directory, you can run:
+![Search Bar Screenshot](./snaps/snap-1.png)
+![Search Bar Screenshot](./snaps/snap-2.png)
+![Search Bar Screenshot](./snaps/snap-3.png)
+![Search Bar Screenshot](./snaps/snap-4.png)
+## Dev setup
+
+### npm install
+
+```
+To set up the environment dependencies
+```
 
 ### `npm start`
 

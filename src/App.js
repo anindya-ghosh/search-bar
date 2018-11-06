@@ -66,21 +66,19 @@ class App extends Component {
       searchKey: '',
       searchResult: []
     };
-    this.notifyClear = this.notifyClear.bind(this);
-    this.setCurrentSearchKey = this.setCurrentSearchKey.bind(this);
-    this.fetchSearchKey = fetchSearchKey(this.fetchSearchResult.bind(this), 300);
+    this.fetchSearchKey = fetchSearchKey(this.fetchSearchResult, 300);
   }
   /**
    * stores the current search key passed from the search bar component on every change
    * @param {string} key 
    */
-  setCurrentSearchKey (key = '') {
+  setCurrentSearchKey = (key = '') => {
     this.currentKey = key;
   }
   /**
    * initiates an API call for search with stored search key
    */
-  fetchSearchResult () {
+  fetchSearchResult = () => {
     this.setState(() => {
       return {
         searchKey: this.currentKey,
@@ -91,8 +89,12 @@ class App extends Component {
   /**
    * resets search key state
    */
-  notifyClear () {
-    this.setState({searchKey: ''});
+  notifyClear = () => {
+    this.currentKey = '';
+    this.setState({
+      searchKey: this.currentKey,
+      searchResult: []
+    });
   }
   /**
    * renders App component
@@ -100,7 +102,7 @@ class App extends Component {
   render() {
     return (
       <div className="Search-App">
-        <SearchBar 
+        <SearchBar
           fetchSearchKey = { this.fetchSearchKey }
           setCurrentSearchKey = { this.setCurrentSearchKey }
           notifyClear = { this.notifyClear }
