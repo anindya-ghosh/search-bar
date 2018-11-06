@@ -2,6 +2,7 @@
 # Search Bar
 An interactive search bar, which returns search result based on data previously feed. The main purpose of this app is to serve a taste like google or youtube search bar.
 
+hosted at https://5earch-bar.netlify.com/
 
 ![Search Bar Screenshot](./snaps/snap-1.png)
 ![Search Bar Screenshot](./snaps/snap-2.png)
@@ -9,24 +10,24 @@ An interactive search bar, which returns search result based on data previously 
 ![Search Bar Screenshot](./snaps/snap-4.png)
 ## Dev setup
 
-### npm install
+### To set up the environment dependencies
 
 ```
-To set up the environment dependencies
+$ npm install
 ```
 
-### `npm start`
+### To run the portflio builder app
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+$ npm run start
+```
+Client app is served on port `3000`
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Deployment steps
 
-### `npm run build`
+### To build the portflio builder app
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```
+$ npm run build
+```
+Serve the `build` folder using any static server.
