@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './components/search-bar';
 import SearchResult from './components/search-result';
 import data from './ext-data/data';
-import './app.css';
+import './layout.css';
 
 function search (key) {
   var result = [],
