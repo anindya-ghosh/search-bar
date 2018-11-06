@@ -41,6 +41,7 @@
   padding-right: 40px !important;
   background-color: white;
   padding: 5px;
+  caret-color: #12CE66;
 }
 
 .close::before{
