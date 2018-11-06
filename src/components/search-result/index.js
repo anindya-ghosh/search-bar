@@ -4,8 +4,12 @@ import Card from '../card'
 import './index.css';
 
 class Result extends Component {
-  constructor () {
-    super();
+  /**
+   * constructor fn
+   * @param {Object} props component props
+   */
+  constructor (props) {
+    super(props);
     this.state = {keyState: 0};
     this._curHoverId = -1;
     this.resultSpace = React.createRef();
@@ -13,6 +17,12 @@ class Result extends Component {
     this._keyDownHandler = this._keyDownHandler.bind(this);
     this._decideScrollPosition = this._decideScrollPosition.bind(this);
   }
+  /**
+   * handles scroll operation by keyboard arrow keys
+   * - sets keyState depending on the which key is pressed
+   * - sets current hovered card index depending on the which key is pressed
+   * @param {Event} e React event object
+   */
   _keyDownHandler (e) {
     if (e.keyCode === 38) { // up
       this._curHoverId > 0 && (this._curHoverId--);
@@ -24,6 +34,10 @@ class Result extends Component {
       this.setState({keyState: 1});
     }
   }
+  /**
+   * decides the current scroll offset
+   * @param {Reference} cardRef ref of the currently hovered card
+   */
   _decideScrollPosition (cardRef) {
     if (cardRef) {
       let hoveredCardBound = cardRef.current.getBoundingClientRect(),
@@ -38,23 +52,40 @@ class Result extends Component {
       }
     }
   }
+  /**
+   * resets keyState as card is hovered by mouse pointer
+   * also stores index of hovered card
+   * @param {number} id index of hovered card
+   */
   _setMouseHoveredCard (id) {
     this.setState({keyState: 0});
     id !== undefined && (this._curHoverId = id);
-    
   }
+  /**
+   * resets hovered card index and keyState when search key is changed
+   * @param {Object} prevProps previous props
+   */
   componentDidUpdate (prevProps) {
     if (prevProps.searchKey !== this.props.searchKey) {
       this._curHoverId = -1;
       this.setState({keyState: 0});
     }
   }
+  /**
+   * add listener to body element to listen key down event
+   */
   componentDidMount () {
     document.body.addEventListener('keydown', this._keyDownHandler);
   }
+  /**
+   * remove listener from body element to listen key down event
+   */
   componentWillUnmount () {
     document.body.removeEventListener('keydown', this._keyDownHandler);
   }
+  /**
+   * renders This Component
+   */
   render () {
     let noData = this.props.searchKey && !this.props.searchResult.length ? 'no-data' : '';
     return (

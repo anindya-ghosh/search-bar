@@ -25,20 +25,35 @@ function TextHighLighter (props) {
   return textElems;
 }
 class Card extends Component {
+  /**
+   * constructor fn
+   * @param {Object} props component props
+   */
   constructor (props) {
     super(props);
     this.card = React.createRef();
     this.state = {hovered : false};
     this.mouseOverHandler = this.mouseOverHandler.bind(this);
   }
+  /**
+   * notifies parent component that the card is hovered or selected
+   * by key board arrow key / mouse pointer to decide current scroll position
+   */
   componentDidUpdate () {
     this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
     this.props.hovered && (this.props.decideScrollPosition(this.card));
   }
+  /**
+   * notifies parent component that the card is hovered by mouse pointer so that
+   * when keyboard arrow key is pressed it knows where the pointer was previously
+   */
   mouseOverHandler () {
     this.card.current.className = `card ${this.props.hovered ? 'hover' : ''}`;
     this.props.setMouseHoveredCard(this.props.index);
   }
+  /**
+   * renderd Card component
+   */
   render () {
     return (
       <div className={`card`} ref = {this.card} onMouseOver = {this.mouseOverHandler}>
